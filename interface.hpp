@@ -8,8 +8,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct players
+class players
 {
+public:
 	int four[9] = {};		//if exist 1 else 0, other is coordinat x y
 	int three1[7] = {};
 	int three2[7] = {};
@@ -20,6 +21,12 @@ struct players
 	int one2[3] = {};
 	int one3[3] = {};
 	int one4[3] = {};
+	int	map[10][10] = {};
+	int number = 10;
+	int		save_ship(int x, int y, char vh, int num, WINDOW *win);
+	int		shoot(int x, int y, WINDOW *win);
+	void	kill(int x, int y);
+	int		if_killed(int x, int y);
 };
 
 class interface
@@ -35,16 +42,10 @@ class interface
 		void	rules(int i, int num);
 		void	print_field();
 		void print_ships(players p, int i);
-		int	save_ship1(int x, int y, char vh, int num);
-		int	save_ship2(int x, int y, char vh, int num);
-		void	kill2(int x, int y);
-		void	kill1(int x, int y);
-		int		shoot2(int x, int y);
-		int		shoot1(int x, int y);
-		int		if_killed(int x, int y, int map[10][10]);
 		void	rulesG(int i);
 		void	win12(int i);
 		void	print_ships(void);
+		void	goodbye();
 
 
 	private:
@@ -52,24 +53,11 @@ class interface
 		int const	_width = 100;
 		players	p1;
 		players p2;
-		int	map1[10][10] = {};
-		int	map2[10][10] = {};
-		int	num1 = 10;			//how many lives ships exist in player 1
-		int num2 = 10;			//how many lives ships exist in player 2
 //		0 - пусто
 //		1 - корабль
 //		2 - ранив
 //		3 - вбив
 //		4 - мімо
-
-};
-
-class Player
-{
-	public:
-		Player();
-		~Player();
-	private:
 
 };
 
