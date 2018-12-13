@@ -44,6 +44,7 @@ class interface
 		int		if_killed(int x, int y, int map[10][10]);
 		void	rulesG(int i);
 		void	win12(int i);
+		void	print_ships(void);
 
 
 	private:
@@ -53,11 +54,13 @@ class interface
 		players p2;
 		int	map1[10][10] = {};
 		int	map2[10][10] = {};
-		char pmap1[10][24];
-		char pmap2[10][24];
 		int	num1 = 10;			//how many lives ships exist in player 1
 		int num2 = 10;			//how many lives ships exist in player 2
-
+//		0 - пусто
+//		1 - корабль
+//		2 - ранив
+//		3 - вбив
+//		4 - мімо
 
 };
 

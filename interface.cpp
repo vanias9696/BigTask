@@ -20,28 +20,7 @@ interface::interface()
 	init_pair(4, COLOR_BLUE, COLOR_BLACK);
 	init_pair(5, COLOR_MAGENTA, COLOR_BLACK);
 	init_pair(6, COLOR_CYAN, COLOR_BLACK);
-	//				    0 1 2 3 4 5 6 7 8 9
-	//				  01234567890123456789012		x*2 + 2
-	strcpy(pmap1[0], "0 . . . . . . . . . . 0\0");
-	strcpy(pmap1[1], "1 . . . . . . . . . . 1\0");
-	strcpy(pmap1[2], "2 . . . . . . . . . . 2\0");
-	strcpy(pmap1[3], "3 . . . . . . . . . . 3\0");
-	strcpy(pmap1[4],  "4 . . . . . . . . . . 4\0");
-	strcpy(pmap1[5],  "5 . . . . . . . . . . 5\0");
-	strcpy(pmap1[6],  "6 . . . . . . . . . . 6\0");
-	strcpy(pmap1[7],  "7 . . . . . . . . . . 7\0");
-	strcpy(pmap1[8],  "8 . . . . . . . . . . 8\0");
-	strcpy(pmap1[9],  "9 . . . . . . . . . . 9\0");
-	strcpy(pmap2[0],  "0 . . . . . . . . . . 0\0");
-	strcpy(pmap2[1],  "1 . . . . . . . . . . 1\0");
-	strcpy(pmap2[2],  "2 . . . . . . . . . . 2\0");
-	strcpy(pmap2[3],  "3 . . . . . . . . . . 3\0");
-	strcpy(pmap2[4],  "4 . . . . . . . . . . 4\0");
-	strcpy(pmap2[5],  "5 . . . . . . . . . . 5\0");
-	strcpy(pmap2[6],  "6 . . . . . . . . . . 6\0");
-	strcpy(pmap2[7],  "7 . . . . . . . . . . 7\0");
-	strcpy(pmap2[8],  "8 . . . . . . . . . . 8\0");
-	strcpy(pmap2[9],  "9 . . . . . . . . . . 9\0");
+
 }
 
 interface::~interface()
@@ -383,28 +362,28 @@ void interface::print_field(void)
 	box(win, 0, 0);
 	wattron(win, COLOR_PAIR(6));
 	mvwprintw(win, 7, 3, "  A B C D E F G H I J");
-	mvwprintw(win, 8, 3, pmap1[0]);
-	mvwprintw(win, 9, 3, pmap1[1]);
-	mvwprintw(win, 10, 3, pmap1[2]);
-	mvwprintw(win, 11, 3, pmap1[3]);
-	mvwprintw(win, 12, 3, pmap1[4]);
-	mvwprintw(win, 13, 3, pmap1[5]);
-	mvwprintw(win, 14, 3, pmap1[6]);
-	mvwprintw(win, 15, 3, pmap1[7]);
-	mvwprintw(win, 16, 3, pmap1[8]);
-	mvwprintw(win, 17, 3, pmap1[9]);
+	mvwprintw(win, 8, 3, "0 . . . . . . . . . . 0\0");
+	mvwprintw(win, 9, 3, "1 . . . . . . . . . . 1\0");
+	mvwprintw(win, 10, 3, "2 . . . . . . . . . . 2\0");
+	mvwprintw(win, 11, 3, "3 . . . . . . . . . . 3\0");
+	mvwprintw(win, 12, 3, "4 . . . . . . . . . . 4\0");
+	mvwprintw(win, 13, 3, "5 . . . . . . . . . . 5\0");
+	mvwprintw(win, 14, 3, "6 . . . . . . . . . . 6\0");
+	mvwprintw(win, 15, 3, "7 . . . . . . . . . . 7\0");
+	mvwprintw(win, 16, 3, "8 . . . . . . . . . . 8\0");
+	mvwprintw(win, 17, 3, "9 . . . . . . . . . . 9\0");
 	mvwprintw(win, 18, 3, "  A B C D E F G H I J");
 	mvwprintw(win, 7, 50, "  A B C D E F G H I J");
-	mvwprintw(win, 8, 50, pmap2[0]);
-	mvwprintw(win, 9, 50, pmap2[1]);
-	mvwprintw(win, 10, 50, pmap2[2]);
-	mvwprintw(win, 11, 50, pmap2[3]);
-	mvwprintw(win, 12, 50, pmap2[4]);
-	mvwprintw(win, 13, 50, pmap2[5]);
-	mvwprintw(win, 14, 50, pmap2[6]);
-	mvwprintw(win, 15, 50, pmap2[7]);
-	mvwprintw(win, 16, 50, pmap2[8]);
-	mvwprintw(win, 17, 50, pmap2[9]);
+	mvwprintw(win, 8, 50, "0 . . . . . . . . . . 0\0");
+	mvwprintw(win, 9, 50, "1 . . . . . . . . . . 1\0");
+	mvwprintw(win, 10, 50, "2 . . . . . . . . . . 2\0");
+	mvwprintw(win, 11, 50, "3 . . . . . . . . . . 3\0");
+	mvwprintw(win, 12, 50, "4 . . . . . . . . . . 4\0");
+	mvwprintw(win, 13, 50, "5 . . . . . . . . . . 5\0");
+	mvwprintw(win, 14, 50, "6 . . . . . . . . . . 6\0");
+	mvwprintw(win, 15, 50, "7 . . . . . . . . . . 7\0");
+	mvwprintw(win, 16, 50, "8 . . . . . . . . . . 8\0");
+	mvwprintw(win, 17, 50, "9 . . . . . . . . . . 9\0");
 	mvwprintw(win, 18, 50, "  A B C D E F G H I J");
 	wattroff(win, COLOR_PAIR(6));
 	wattron(win, COLOR_PAIR(5));
@@ -540,32 +519,19 @@ void	interface::kill1(int x, int y)
 	if (x > -1 && x < 10 && y > -1 && y < 10 && map2[x][y] == 2)
 	{
 		map2[x][y] = 3;
-		pmap2[y][x * 2 + 2] = '#';
 		if (x - 1 > -1)
 		{
 			if (y - 1 > -1)
-			{
 				map2[x - 1][y - 1] = 4;
-				pmap2[y - 1][(x - 1) * 2 + 2] = 'O';
-			}
 			if (y + 1 < 10)
-			{
 				map2[x - 1][y + 1] = 4;
-				pmap2[y + 1][(x - 1) * 2 + 2] = 'O';
-			}
 		}
 		if (x + 1 > -1)
 		{
 			if (y - 1 > -1)
-			{
 				map2[x + 1][y - 1] = 4;
-				pmap2[y - 1][(x + 1) * 2 + 2] = 'O';
-			}
 			if (y + 1 < 10)
-			{
 				map2[x + 1][y + 1] = 4;
-				pmap2[y + 1][(x + 1) * 2 + 2] = 'O';
-			}
 		}
 		kill1(x - 1, y);
 		kill1(x + 1, y);
@@ -575,7 +541,6 @@ void	interface::kill1(int x, int y)
 	else if (x > -1 && x < 10 && y > -1 && y < 10 && map2[x][y] == 0)
 	{
 		map2[x][y] = 4;
-		pmap2[y][x * 2 + 2] = 'O';
 	}
 }
 
@@ -584,13 +549,11 @@ int		interface::shoot1(int x, int y)
 	if (map2[x][y] == 0)
 	{
 		map2[x][y] = 4;
-		pmap2[y][(x * 2) + 2] = 'O';
 		return (1);
 	}
 	else if (map2[x][y] == 1)
 	{
 		map2[x][y] = 2;
-		pmap2[y][(x * 2) + 2] = 'X';
 		if (if_killed(x, y, map2) == 1 && (--num2))
 			kill1(x, y);
 		return (2);
@@ -606,32 +569,19 @@ void	interface::kill2(int x, int y)
 	if (x > -1 && x < 10 && y > -1 && y < 10 && map1[x][y] == 2)
 	{
 		map1[x][y] = 3;
-		pmap1[y][x * 2 + 2] = '#';
 		if (x - 1 > -1)
 		{
 			if (y - 1 > -1)
-			{
 				map1[x - 1][y - 1] = 4;
-				pmap1[y - 1][(x - 1) * 2 + 2] = 'O';
-			}
 			if (y + 1 < 10)
-			{
 				map1[x - 1][y + 1] = 4;
-				pmap1[y + 1][(x - 1) * 2 + 2] = 'O';
-			}
 		}
 		if (x + 1 > -1)
 		{
 			if (y - 1 > -1)
-			{
 				map1[x + 1][y - 1] = 4;
-				pmap1[y - 1][(x + 1) * 2 + 2] = 'O';
-			}
 			if (y + 1 < 10)
-			{
 				map1[x + 1][y + 1] = 4;
-				pmap1[y + 1][(x + 1) * 2 + 2] = 'O';
-			}
 		}
 		kill2(x - 1, y);
 		kill2(x + 1, y);
@@ -639,10 +589,7 @@ void	interface::kill2(int x, int y)
 		kill2(x, y + 1);
 	}
 	else if (x > -1 && x < 10 && y > -1 && y < 10 && map1[x][y] == 0)
-	{
 		map1[x][y] = 4;
-		pmap1[y][x * 2 + 2] = 'O';
-	}
 }
 
 int		interface::shoot2(int x, int y)
@@ -650,13 +597,11 @@ int		interface::shoot2(int x, int y)
 	if (map1[x][y] == 0)
 	{
 		map1[x][y] = 4;
-		pmap1[y][(x * 2) + 2] = 'O';
 		return (1);
 	}
 	else if (map1[x][y] == 1)
 	{
 		map1[x][y] = 2;
-		pmap1[y][(x * 2) + 2] = 'X';
 		if (if_killed(x, y, map1) == 1 && (--num1))
 			kill2(x, y);
 		return (2);
@@ -665,6 +610,52 @@ int		interface::shoot2(int x, int y)
 	mvwprintw(win, 20, 27, "You alredy shoot here!");
 	wattroff(win, COLOR_PAIR(2));
 	return 0;
+}
+
+void	interface::print_ships(void)
+{
+	for (int i = 0; i < 10; ++i)
+	{
+		for (int j = 0; j < 10; ++j)
+		{
+			if (map1[i][j] == 2)
+			{
+				wattron(win, COLOR_PAIR(5));
+				mvwprintw(win, 8 + j, 5 + 2*i , "X");
+				wattroff(win, COLOR_PAIR(5));
+			}
+			else if (map1[i][j] == 3)
+			{
+				wattron(win, COLOR_PAIR(5));
+				mvwprintw(win, 8 + j, 5 + 2*i , "#");
+				wattroff(win, COLOR_PAIR(5));
+			}
+			else if (map1[i][j] == 4)
+			{
+				wattron(win, COLOR_PAIR(6));
+				mvwprintw(win, 8 + j, 5 + 2*i, "O");
+				wattroff(win, COLOR_PAIR(5));
+			}
+			if (map2[i][j] == 2)
+			{
+				wattron(win, COLOR_PAIR(5));
+				mvwprintw(win, 8 + j, 52 + 2*i , "X");
+				wattroff(win, COLOR_PAIR(5));
+			}
+			else if (map2[i][j] == 3)
+			{
+				wattron(win, COLOR_PAIR(5));
+				mvwprintw(win, 8 + j, 52 + 2*i , "#");
+				wattroff(win, COLOR_PAIR(5));
+			}
+			else if (map2[i][j] == 4)
+			{
+				wattron(win, COLOR_PAIR(6));
+				mvwprintw(win, 8 + j, 52 + 2*i, "O");
+				wattroff(win, COLOR_PAIR(5));
+			}
+		}
+	}
 }
 
 void	interface::rulesG(int i)
@@ -680,6 +671,7 @@ void	interface::rulesG(int i)
 	mvwprintw(win, 25, 2, "If you kill the ship, the place will look like    #");
 	wattroff(win, COLOR_PAIR(1));
 	print_field();
+	print_ships();
 	wattron(win, COLOR_PAIR(5));
 	if (i % 2 != 0)
 		mvwprintw(win, 6, 31, "PLAYER 1 move");
