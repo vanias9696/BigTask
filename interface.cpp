@@ -141,7 +141,7 @@ void interface::rules(int i, int num)
 	mvwprintw(win, 1, 2, "To set the ship enter the first x and y coordinate and press Y[vertically] or X[horizontally]");
 	mvwprintw(win, 2, 2, "As soon as you choose X or Y ship will be installed on the field.");
 	mvwprintw(win, 3, 2, "To select the coordinate for X, enter the value from A to J");
-	mvwprintw(win, 3, 2, "To select the coordinate for Y, enter the value from 0 to 9");
+	mvwprintw(win, 4, 2, "To select the coordinate for Y, enter the value from 0 to 9");
 	mvwprintw(win, 24, 2, "If you want to exit press Q");
 	mvwprintw(win, 22, 2, "Ships cannot touch the sides and corners of each other.");
 	wattroff(win, COLOR_PAIR(1));
@@ -435,3 +435,5 @@ void	interface::game()
 	}
 
 }
+
+//g++ main.cpp interface.cpp players.cpp -std=c++11 -lncurses15
