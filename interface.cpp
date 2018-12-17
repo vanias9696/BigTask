@@ -257,6 +257,8 @@ void	interface::rulesG(int i)
 
 void	interface::win12(int i)
 {
+	wclear(win);
+    wrefresh(win);
 	box(win, 0, 0);
 	wattron(win, COLOR_PAIR(1));
 	mvwprintw(win, 6, 23, "$$$$$__$$______$$$$__$$__$$_$$$$$__$$$$$_____");
@@ -304,8 +306,11 @@ int	interface::placeShips()
     {
     	if (i == 1 && p2.one4[0] == 1)
     		return (1);
-		if (i == 0 && p1.one4[0] == 1 && ++i)
+		else if (i == 0 && p1.one4[0] == 1)
+		{
+			++i;
 			num = 0;
+		}
 		rules(i, num);
 		wattron(win, COLOR_PAIR(3));
 		if (x > -1 && (tmp[0] = x + 'A'))
@@ -357,6 +362,8 @@ int	interface::placeShips()
 
 void	interface::goodbye()
 {
+	wclear(win);
+    wrefresh(win);
 	box(win, 0, 0);
 	wattron(win, COLOR_PAIR(1));
 	mvwprintw(win, 10, 25,"_$$$$___$$$$___$$$$__$$$$$__$$$$$__$$__$$_$$$$$");
@@ -411,10 +418,12 @@ void	interface::game()
     			mvwprintw(win, 20, 23, "You didn`t choose a coordinate!");
    				wattroff(win, COLOR_PAIR(2));
     		}
-    		else if (i % 2 != 0)
+    		else if (i % 2 == 1)
     		{
     			if (p2.shoot(x, y, win) == 1)
+    			{
     				++i;
+    			}
 				x = -1;
     			y = -1;
     		}
@@ -435,5 +444,3 @@ void	interface::game()
 	}
 
 }
-
-//g++ main.cpp interface.cpp players.cpp -std=c++11 -lncurses15
