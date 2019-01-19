@@ -5,9 +5,9 @@ void	players::ship_setting(int num, int x, int y, int vh)
 	for (int n = 0; n < num; ++n)
 	{
 		if (y > 9)
-    		throw "Please move the ship higher!";
-    	if (x > 9)
-    		throw "Please move the ship to the left!";
+		  throw (static_cast<const char *>("Please move the ship higher!"));
+		if (x > 9)
+		  throw (static_cast<const char *>("Please move the ship to the left!"));
 		for (int i = -1; i < 2; ++i)
 		{
 			for (int j = -1; j < 2; ++j)
