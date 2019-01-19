@@ -257,6 +257,8 @@ void	interface::rulesG(int i, players p1, players p2)
 
 void	interface::win12(int i)
 {
+	wclear(win);
+    wrefresh(win);
 	box(win, 0, 0);
 	wattron(win, COLOR_PAIR(1));
 	mvwprintw(win, 6, 23, "$$$$$__$$______$$$$__$$__$$_$$$$$__$$$$$_____");
@@ -293,6 +295,8 @@ void	interface::win12(int i)
 
 void	interface::goodbye()
 {
+	wclear(win);
+    wrefresh(win);
 	box(win, 0, 0);
 	wattron(win, COLOR_PAIR(1));
 	mvwprintw(win, 10, 25,"_$$$$___$$$$___$$$$__$$$$$__$$$$$__$$__$$_$$$$$");
