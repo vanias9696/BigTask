@@ -1,15 +1,10 @@
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "interface.hpp"
+#include "game.hpp"
 
 int main(void)
 {
-	interface in;
+	game on;
+	on.start();
 
-	in.game();
-
-    in.goodbye();
+    on.inf.goodbye();
 	return 0;
 }

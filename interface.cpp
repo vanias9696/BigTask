@@ -20,7 +20,18 @@ interface::interface()
 	init_pair(4, COLOR_BLUE, COLOR_BLACK);
 	init_pair(5, COLOR_MAGENTA, COLOR_BLACK);
 	init_pair(6, COLOR_CYAN, COLOR_BLACK);
+}
 
+interface interface::operator=(interface tmp)
+{
+	return (tmp);
+}
+
+void	interface::error(int color, int first, int second, const char * str)
+{
+	wattron(win, COLOR_PAIR(color));
+	mvwprintw(win, first, second, str);
+	wattroff(win, COLOR_PAIR(color));
 }
 
 interface::~interface()
@@ -56,6 +67,24 @@ void	interface::welcome_window(void)
 	clear();
 
 }
+
+char	interface::printStart(int x, int y)
+{
+	char tmp[2] = "\0";
+
+	wattron(win, COLOR_PAIR(3));
+	if (x > -1 && (tmp[0] = x + 'A'))
+		mvwprintw(win, 11, 38, reinterpret_cast<const char *>(tmp));
+	if (y > -1 && (tmp[0] = y + '0'))
+    	mvwprintw(win, 13, 38, reinterpret_cast<const char *>(tmp));
+    wattroff(win, COLOR_PAIR(3));
+    char ch = wgetch(win);
+    wclear(win);
+    wrefresh(win);
+    return (ch);
+}
+
+
 
 void interface::print_field(void)
 {
@@ -135,7 +164,7 @@ void interface::print_ships(players p, int R)
 }
 
 
-void interface::rules(int i, int num)
+void interface::rules(int i, int num, players p1, players p2)
 {
 	wattron(win, COLOR_PAIR(1));
 	mvwprintw(win, 1, 2, "To set the ship enter the first x and y coordinate and press Y[vertically] or X[horizontally]");
@@ -164,7 +193,7 @@ void interface::rules(int i, int num)
 	mvwprintw(win, 13, 35, "Y: ");
 }
 
-void	interface::print_ships(void)
+void	interface::print_ships2(players p1, players p2)
 {
 	for (int i = 0; i < 10; ++i)
 	{
@@ -210,7 +239,7 @@ void	interface::print_ships(void)
 	}
 }
 
-void	interface::rulesG(int i)
+void	interface::rulesG(int i, players p1, players p2)
 {
 	wattron(win, COLOR_PAIR(1));
 	mvwprintw(win, 1, 2, "To select the coordinates of the target enter x coordinate, y coordinate and press ENTER");
@@ -223,7 +252,7 @@ void	interface::rulesG(int i)
 	mvwprintw(win, 25, 2, "If you kill the ship, the place will look like    #");
 	wattroff(win, COLOR_PAIR(1));
 	print_field();
-	print_ships();
+	print_ships2(p1, p2);
 	wattron(win, COLOR_PAIR(5));
 	if (i % 2 != 0)
 		mvwprintw(win, 6, 31, "PLAYER 1 move");
@@ -291,70 +320,6 @@ void	interface::win12(int i)
 
 }
 
-int	interface::placeShips()
-{
-    int ch;
-    int i = 0;
-    int x = -1;
-    int y = -1;
-    int num = 0;
-    char tmp[2] = "\0";
-
-	while (1)
-    {
-    	if (i == 1 && p2.one4[0] == 1)
-    		return (1);
-		if (i == 0 && p1.one4[0] == 1 && ++i)
-			num = 0;
-		rules(i, num);
-		wattron(win, COLOR_PAIR(3));
-		if (x > -1 && (tmp[0] = x + 'A'))
-			mvwprintw(win, 11, 38, reinterpret_cast<const char *>(tmp));
-		if (y > -1 && (tmp[0] = y + '0'))
-			mvwprintw(win, 13, 38, reinterpret_cast<const char *>(tmp));
-		wattroff(win, COLOR_PAIR(3));
-    	ch = wgetch(win);
-    	wclear(win);
-    	wrefresh(win);
-    	if (ch == 'q' || ch == 'Q')
-    		return 0;
-    	else if (ch >= '0' && ch <= '9')
-    		y = ch - '0';
-    	else if (ch >= 'A' && ch <= 'J')
-    		x = ch - 'A';
-    	else if (ch >= 'a' && ch <= 'j')
-    		x = ch - 'a';
-    	else if (ch == 'x' || ch == 'X' || ch == 'y' || ch == 'Y')
-    	{
-    		if (x == -1 || y == -1)
-    		{
-    			wattron(win, COLOR_PAIR(2));
-    			mvwprintw(win, 20, 23, "You didn`t choose a coordinate!");
-    			wattroff(win, COLOR_PAIR(2));
-    		}
-    		else if (i == 0 && (p1.save_ship(x, y, (char)ch, num, win)) == 1)
-    		{
-				x = -1;
-    			y = -1;
-    			++num;
-    		}
-    		else if (i == 1 && (p2.save_ship(x, y, (char)ch, num, win)) == 1)
-    		{
-    			x = -1;
-    			y = -1;
-    			++num;
-    		}
-    	}
-    	else
-    	{
-			wattron(win, COLOR_PAIR(2));
-    		mvwprintw(win, 20, 18, "Please enter [0 - 9] or [A - J] or X or Y");
-    		wattroff(win, COLOR_PAIR(2));
-    	}
-    }
-    return 1;
-}
-
 void	interface::goodbye()
 {
 	box(win, 0, 0);
@@ -368,72 +333,3 @@ void	interface::goodbye()
 	wattroff(win, COLOR_PAIR(1));
 	wgetch(win);
 }
-
-void	interface::game()
-{
-	if (placeShips() == 0)
-		return ;
-	int i = 1;
-	int ch;
-	int x = -1;
-	int y = -1;
-	char tmp[2] = "\0";
-	while (1)
-	{
-		if (p1.number == 0 || p2.number == 0)
-		{
-			win12(p1.number == 0 ? 2 : 1);
-			return ;
-		}
-		rulesG(i);
-		wattron(win, COLOR_PAIR(3));
-		if (x > -1 && (tmp[0] = x + 'A'))
-			mvwprintw(win, 11, 38, reinterpret_cast<const char *>(tmp));
-		if (y > -1 && (tmp[0] = y + '0'))
-			mvwprintw(win, 13, 38, reinterpret_cast<const char *>(tmp));
-		wattroff(win, COLOR_PAIR(3));
-		ch = wgetch(win);
-    	wclear(win);
-    	wrefresh(win);
-    	if (ch == 'q' || ch == 'Q')
-    		return ;
-    	else if (ch >= '0' && ch <= '9')
-    		y = ch - '0';
-    	else if (ch >= 'A' && ch <= 'J')
-    		x = ch - 'A';
-    	else if (ch >= 'a' && ch <= 'j')
-    		x = ch - 'a';
-    	else if (ch == 10)
-    	{
-    		if (x == -1 || y == -1)
-    		{
-    			wattron(win, COLOR_PAIR(2));
-    			mvwprintw(win, 20, 23, "You didn`t choose a coordinate!");
-   				wattroff(win, COLOR_PAIR(2));
-    		}
-    		else if (i % 2 != 0)
-    		{
-    			if (p2.shoot(x, y, win) == 1)
-    				++i;
-				x = -1;
-    			y = -1;
-    		}
-    		else if (i % 2 == 0)
-    		{
-    			if (p1.shoot(x, y, win) == 1)
-    				++i;
-    			x = -1;
-    			y = -1;
-    		}
-    	}
-    	else
-    	{
-			wattron(win, COLOR_PAIR(2));
-    		mvwprintw(win, 20, 21, "Please enter [0 - 9] or [A - J] or O");
-    		wattroff(win, COLOR_PAIR(2));
-    	}
-	}
-
-}
-
-//g++ main.cpp interface.cpp players.cpp -std=c++11 -lncurses15

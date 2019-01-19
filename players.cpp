@@ -1,56 +1,26 @@
-#include "interface.hpp"
+#include "players.hpp"
 
-
-int	players::save_ship(int x, int y, char vh, int num, WINDOW *win)
+void	players::ship_setting(int num, int x, int y, int vh)
 {
-	int x1 = x;
-	int y1 = y;
-
-	if (num == 0)
-		num = 4;
-	else if (num < 3)
-		num = 3;
-	else if (num < 6)
-		num = 2;
-	else
-		num = 1;
-
 	for (int n = 0; n < num; ++n)
 	{
 		if (y > 9)
-		{
-			wattron(win, COLOR_PAIR(2));
-    		mvwprintw(win, 20, 22, "Not enough vertical space for ship!");
-    		mvwprintw(win, 21, 25, "Please move the ship higher!");
-    		wattroff(win, COLOR_PAIR(2));
-    		return 0;
-    	}
+    		throw "Please move the ship higher!";
     	if (x > 9)
-    	{
-			wattron(win, COLOR_PAIR(2));
-    		mvwprintw(win, 20, 22, "Not enough horizontal space for ship!");
-    		mvwprintw(win, 21, 24, "Please move the ship to the left!");
-    		wattroff(win, COLOR_PAIR(2));
-    		return 0;
-    	}
+    		throw "Please move the ship to the left!";
 		for (int i = -1; i < 2; ++i)
 		{
 			for (int j = -1; j < 2; ++j)
 			{
 				if (x + i > -1 && x + i < 10 && y + j > -1 && y + j < 10 && map[x + i][y + j] != 0)
 				{
-					wattron(win, COLOR_PAIR(2));
-    				mvwprintw(win, 20, 25, "Not enough space for ship!");
-    				mvwprintw(win, 21, 24, "Coordinate");
-    				char tmp[2] = "\0";
-    				tmp[0] = x + i + 'A';
-    				mvwprintw(win, 21, 35, reinterpret_cast<const char *>(tmp));
-    				tmp[0] = y + j + '0';
-    				mvwprintw(win, 21, 37, reinterpret_cast<const char *>(tmp));
-    				mvwprintw(win, 21, 39, "already taken!");
-    				wattroff(win, COLOR_PAIR(2));
-    				return 0;
-
+					std::string tmp;
+					tmp += "Coordinate ";
+					tmp += (x + i + 'A');
+					tmp += " ";
+					tmp += (y + j + '0');
+					tmp += " already taken!";
+					throw tmp.c_str();
 				}
 			}
 		}
@@ -59,6 +29,19 @@ int	players::save_ship(int x, int y, char vh, int num, WINDOW *win)
 		else
 			++x;
 	}
+}
+
+void	players::save_ship(int x1, int y1, char vh, int num)
+{
+	if (num == 0)
+		num = 4;
+	else if (num < 3)
+		num = 3;
+	else if (num < 6)
+		num = 2;
+	else
+		num = 1;
+	ship_setting(num, x1, y1, vh);
 	for (int i = 0; i < num; ++i)
 	{
 		map[x1][y1] = 1;
@@ -127,7 +110,6 @@ int	players::save_ship(int x, int y, char vh, int num, WINDOW *win)
 		else
 			++x1;
 	}
-	return (1);
 }
 
 
@@ -187,7 +169,7 @@ void	players::kill(int x, int y)
 	}
 }
 
-int		players::shoot(int x, int y, WINDOW *win)
+int		players::shoot(int x, int y)
 {
 	if (map[x][y] == 0)
 	{
@@ -201,8 +183,5 @@ int		players::shoot(int x, int y, WINDOW *win)
 			kill(x, y);
 		return (2);
 	}
-	wattron(win, COLOR_PAIR(2));
-	mvwprintw(win, 20, 27, "You alredy shoot here!");
-	wattroff(win, COLOR_PAIR(2));
-	return 0;
+	throw 1;
 }

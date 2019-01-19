@@ -1,7 +1,7 @@
 NAME	=	battle_ship
 CXX		=	g++
 FLAGS	=	-std=c++11 -Wall -Wextra
-SRCS	=	main.cpp interface.cpp players.cpp
+SRCS	=	main.cpp players.cpp game.cpp interface.cpp
 OBJ		=	$(SRCS:.cpp=.o)
 
 all: $(NAME)
