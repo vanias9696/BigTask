@@ -31,7 +31,7 @@ void	players::ship_setting(int num, int x, int y, int vh)
 	}
 }
 
-void	players::save_ship(int x1, int y1, char vh, int num)
+void	players::save_ship(int x, int y, char vh, int num)
 {
 	if (num == 0)
 		num = 4;
@@ -41,74 +41,14 @@ void	players::save_ship(int x1, int y1, char vh, int num)
 		num = 2;
 	else
 		num = 1;
-	ship_setting(num, x1, y1, vh);
+	ship_setting(num, x, y, vh);
 	for (int i = 0; i < num; ++i)
 	{
-		map[x1][y1] = 1;
-		if (four[0] == 0)
-		{
-			four[i*2 + 1] = x1;
-			four[i*2 + 2] = y1;
-			four[0] = i + 1 == num ? 1 : 0;
-		}
-		else if (three1[0] == 0)
-		{
-			three1[i*2 + 1] = x1;
-			three1[i*2 + 2] = y1;
-			three1[0] = i + 1 == num ? 1 : 0;
-		}
-		else if (three2[0] == 0)
-		{
-			three2[i*2 + 1] = x1;
-			three2[i*2 + 2] = y1;
-			three2[0] = i + 1 == num ? 1 : 0;
-		}
-		else if (two1[0] == 0)
-		{
-			two1[i*2 + 1] = x1;
-			two1[i*2 + 2] = y1;
-			two1[0] = i + 1 == num ? 1 : 0;
-		}
-		else if (two2[0] == 0)
-		{
-			two2[i*2 + 1] = x1;
-			two2[i*2 + 2] = y1;
-			two2[0] = i + 1 == num ? 1 : 0;
-		}
-		else if (two3[0] == 0)
-		{
-			two3[i*2 + 2] = y1;
-			two3[i*2 + 1] = x1;
-			two3[0] = i + 1 == num ? 1 : 0;
-		}
-		else if (one1[0] == 0)
-		{
-			one1[i*2 + 1] = x1;
-			one1[i*2 + 2] = y1;
-			one1[0] = 1;
-		}
-		else if (one2[0] == 0)
-		{
-			one2[i*2 + 1] = x1;
-			one2[i*2 + 2] = y1;
-			one2[0] = 1;
-		}
-		else if (one3[0] == 0)
-		{
-			one3[i*2 + 1] = x1;
-			one3[i*2 + 2] = y1;
-			one3[0] = 1;
-		}
-		else
-		{
-			one4[i*2 + 1] = x1;
-			one4[i*2 + 2] = y1;
-			one4[0] = 1;
-		}
+		map[x][y] = 1;
 		if (vh == 'y' || vh == 'Y')
-			++y1;
+			++y;
 		else
-			++x1;
+			++x;
 	}
 }
 

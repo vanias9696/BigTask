@@ -13,6 +13,8 @@ class game
 		game();
 		~game();
 		int		setting_values(char ch);
+		void    ship_install(players *pl, char ch, int *num);
+		void    shoot_ship(players *pl, int *i);
 		void	start();
 		int		placeShips();
 		interface	inf;

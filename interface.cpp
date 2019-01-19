@@ -123,46 +123,17 @@ void interface::print_field(void)
 
 void interface::print_ships(players p, int R)
 {
-	if (p.four[0])
+	wattron(win, COLOR_PAIR(5));
+	for (int i = 0; i < 10; ++i)
 	{
-		for (int i = 1; i < 8; i = i + 2)
-			mvwprintw(win, p.four[i + 1] + 8, p.four[i] * 2 + 5 + R, "#");
+		for (int j = 0; j < 10; ++j)
+		{
+			if (p.map[i][j] == 1)
+				mvwprintw(win, 8 + j, 5 + R + 2*i , "#");
+		}
 	}
-	if (p.three1[0])
-	{
-		for (int i = 1; i < 6; i = i + 2)
-			mvwprintw(win, p.three1[i + 1] + 8, p.three1[i] * 2 + 5 + R, "#");
-	}
-	if (p.three2[0])
-	{
-		for (int i = 1; i < 6; i = i + 2)
-			mvwprintw(win, p.three2[i + 1] + 8, p.three2[i] * 2 + 5 + R, "#");
-	}
-	if (p.two1[0])
-	{
-		for (int i = 1; i < 4; i = i + 2)
-			mvwprintw(win, p.two1[i + 1] + 8, p.two1[i] * 2 + 5 + R, "#");
-	}
-	if (p.two2[0])
-	{
-		for (int i = 1; i < 4; i = i + 2)
-			mvwprintw(win, p.two2[i + 1] + 8, p.two2[i] * 2 + 5 + R, "#");
-	}
-	if (p.two3[0])
-	{
-		for (int i = 1; i < 4; i = i + 2)
-			mvwprintw(win, p.two3[i + 1] + 8, p.two3[i] * 2 + 5 + R, "#");
-	}
-	if (p.one1[0])
-		mvwprintw(win, p.one1[2] + 8, p.one1[1] * 2 + 5 + R, "#");
-	if (p.one2[0])
-		mvwprintw(win, p.one2[2] + 8, p.one2[1] * 2 + 5 + R, "#");
-	if (p.one3[0])
-		mvwprintw(win, p.one3[2] + 8, p.one3[1] * 2 + 5 + R, "#");
-	if (p.one4[0])
-		mvwprintw(win, p.one4[2] + 8, p.one4[1] * 2 + 5 + R, "#");
+	wattroff(win, COLOR_PAIR(5));
 }
-
 
 void interface::rules(int i, int num, players p1, players p2)
 {

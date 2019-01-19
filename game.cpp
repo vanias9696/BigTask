@@ -29,6 +29,27 @@ int game::setting_values(char ch)
     return 1;
 }
 
+void    game::ship_install(players *pl, char ch, int *num)
+{
+    if (x_ == -1 || y_ == -1)
+        inf.error(2, 20, 23, "You didn`t choose a coordinate!");
+    else
+    {
+        try
+        {
+            pl->save_ship(x_, y_, ch, *num);
+            x_ = -1;
+            y_ = -1;
+            *num = *num + 1;
+        }
+        catch (const char *a)
+        {
+            inf.error(2, 20, 25, "Not enough space for ship!");
+            inf.error(2, 21, 24, a);
+        }
+    }
+
+}
 
 int game::placeShips()
 {
@@ -38,61 +59,46 @@ int game::placeShips()
 
     while (1)
     {
-        if (i == 1 && p2.one4[0] == 1)
+        if (i == 1 && num == 10)
             return (1);
-        if (i == 0 && p1.one4[0] == 1 && ++i)
+        if (i == 0 && num == 10 && ++i)
             num = 0;
         inf.rules(i, num, p1, p2);
         ch = inf.printStart(x_, y_);
         if (ch == 'q' || ch == 'Q')
             return 0;
         else if (setting_values(ch) == 0)
-            ch += 0;
+            ;
         else if (ch == 'x' || ch == 'X' || ch == 'y' || ch == 'Y')
-        {
-            if (x_ == -1 || y_ == -1)
-                inf.error(2, 20, 23, "You didn`t choose a coordinate!");
-            else if (i == 0)
-            {
-                try
-                {
-                    p1.save_ship(x_, y_, ch, num);
-                    x_ = -1;
-                    y_ = -1;
-                    ++num;
-                }
-                catch (const char *a)
-                {
-                    inf.error(2, 20, 25, "Not enough space for ship!");
-                    inf.error(2, 21, 24, a);
-                }
-            }
-            else if (i == 1)
-            {
-                try
-                {
-                    p2.save_ship(x_, y_, ch, num);
-                    x_ = -1;
-                    y_ = -1;
-                    ++num;
-                }
-                catch (const char *a)
-                {
-                    inf.error(2, 20, 25, "Not enough space for ship!");
-                    inf.error(2, 21, 24, a);
-                }
-            }
-        }
+            ship_install(i == 0 ? &p1 : &p2, ch, &num);
         else
             inf.error(2, 20, 18, "Please enter [0 - 9] or [A - J] or X or Y");
     }
     return 1;
 }
 
+void    game::shoot_ship(players *pl, int *i)
+{
+    if (x_ == -1 || y_ == -1)
+        inf.error(2, 20, 23, "You didn`t choose a coordinate!");
+    else
+    {
+        try
+        {
+            if (pl->shoot(x_, y_) == 1)
+                *i = *i + 1;
+        }
+        catch (...)
+        {
+            inf.error(2, 20, 27, "You alredy shoot here!");
+        }
+        x_ = -1;
+        y_ = -1;
+    }
+}
+
 void	game::start()
 {
-	if (placeShips() == 0)
-		return ;
 	int i = 1;
 	int ch;
     x_ = -1;
@@ -111,38 +117,7 @@ void	game::start()
         if (setting_values(ch) == 0)
             ;
     	else if (ch == 10)
-    	{
-    		if (x_ == -1 || y_ == -1)
-                inf.error(2, 20, 23, "You didn`t choose a coordinate!");
-            else if (i % 2 != 0)
-            {
-                try
-                {
-                    if (p2.shoot(x_, y_) == 1)
-                        ++i;
-                }
-                catch (...)
-                {
-                    inf.error(2, 20, 27, "You alredy shoot here!");
-                }
-                x_ = -1;
-                y_ = -1;
-            }
-            else if (i % 2 == 0)
-            {
-                try
-                {
-                    if (p1.shoot(x_, y_) == 1)
-                        ++i;
-                }
-                catch (...)
-                {
-                    inf.error(2, 20, 27, "You alredy shoot here!");
-                }
-                x_ = -1;
-                y_ = -1;
-            }
-    	}
+            shoot_ship(i % 2 != 0 ? &p2 : &p1, &i);
     	else
             inf.error(2, 20, 18, "Please enter [0 - 9] or [A - J] or ENTER!");
 	}
