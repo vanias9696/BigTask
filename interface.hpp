@@ -1,11 +1,6 @@
 #ifndef INTERFACE_HPP
 # define INTERFACE_HPP
-
 #include <ncurses.h>
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "players.hpp"
 
 class interface
@@ -17,7 +12,6 @@ class interface
 		void		printStart();
 		void		error(int color, int first, int second, const char * str);
 		void		welcome_window();
-		void		draw_borders(WINDOW *screen);
 		void		rules(int i, int num, players p1, players p2);
 		void		print_field();
 		void		print_ships(players p, int i);
