@@ -1,10 +1,6 @@
 #include "game.hpp"
 
-game::game()
-{
-    x_ = -1;
-    y_ = -1;
-}
+game::game() : x_(-1), y_(-1){}
 
 game::~game(){
 }
