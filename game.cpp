@@ -47,7 +47,7 @@ void    game::ship_install(players *pl, char ch, int *num)
 
 }
 
-int game::placeShips()
+int game::place_ships()                     //set ships for 1 and 2 players
 {
     char    ch;
     int     i = 0;
@@ -59,8 +59,8 @@ int game::placeShips()
             return (1);
         if (i == 0 && num == 10 && ++i)
             num = 0;
-        inf.rules(i, num, p1, p2);
-        ch = inf.printStart(x_, y_);
+        inf.rules_set(i, num, p1, p2);
+        ch = inf.print_start(x_, y_);
         if (ch == 'q' || ch == 'Q')
             return 0;
         else if (setting_values(ch) == 0)
@@ -73,7 +73,7 @@ int game::placeShips()
     return 1;
 }
 
-void    game::shoot_ship(players *pl, int *i)
+void    game::shoot_ship(players *pl, int *i)   // check if can shoot
 {
     if (x_ == -1 || y_ == -1)
         inf.error(2, 20, 23, "You didn`t choose a coordinate!");
@@ -93,7 +93,7 @@ void    game::shoot_ship(players *pl, int *i)
     }
 }
 
-void	game::start()
+void	game::start()      //main method which call methods of displaying information and shooring
 {
 	int i = 1;
 	int ch;
@@ -106,8 +106,8 @@ void	game::start()
 		{
 			inf.win12(p1.number == 0 ? 2 : 1);
 			return ;}
-		inf.rulesG(i, p1, p2);
-        ch = inf.printStart(x_, y_);
+		inf.rules_game(i, p1, p2);
+        ch = inf.print_start(x_, y_);
     	if (ch == 'q' || ch == 'Q')
     		return ;
         if (setting_values(ch) == 0)

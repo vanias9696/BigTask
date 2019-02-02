@@ -9,17 +9,16 @@ class interface
 		interface();
 		~interface();
 		WINDOW		*win;
-		void		printStart();
 		void		error(int color, int first, int second, const char * str);
 		void		welcome_window();
-		void		rules(int i, int num, players p1, players p2);
+		void		rules_set(int i, int num, players p1, players p2);
 		void		print_field();
-		void		print_ships(players p, int i);
-		void		rulesG(int i, players p1, players p2);
+		void		print_ships_set(players p, int i);
+		void		rules_game(int i, players p1, players p2);
 		void		win12(int i);
-		void		print_ships2(players p1, players p2);
+		void		print_ships_game(players p1, players p2);
 		void		goodbye();
-		char		printStart(int x, int y);
+		char		print_start(int x, int y);
 		interface	operator=(interface tmp);
 
 	private:

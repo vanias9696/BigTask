@@ -1,7 +1,7 @@
 #include "players.hpp"
 #include <iostream>
 
-void	players::ship_setting(int num, int x, int y, int vh)
+void	players::ship_setting(int num, int x, int y, int vh)	//check the field: can we install the ship
 {
 	for (int n = 0; n < num; ++n)
 	{
@@ -32,7 +32,7 @@ void	players::ship_setting(int num, int x, int y, int vh)
 	}
 }
 
-void	players::save_ship(int x, int y, char vh, int num)
+void	players::save_ship(int x, int y, char vh, int num)		//save the ship, if we can
 {
 	if (num == 0)
 		num = 4;
@@ -54,7 +54,7 @@ void	players::save_ship(int x, int y, char vh, int num)
 }
 
 
-int		players::if_killed(int x, int y)
+int		players::if_killed(int x, int y)	//check if all coordinates ship was hurt				
 {
 	int t = x;
 	while(x > -1 && map[x][y] == 2)
@@ -80,7 +80,7 @@ int		players::if_killed(int x, int y)
 	return 1;
 }
 
-void	players::kill(int x, int y)
+void	players::kill(int x, int y)					//kill ship (all coordinates ship)
 {
 	if (x > -1 && x < 10 && y > -1 && y < 10 && map[x][y] == 2)
 	{
@@ -124,5 +124,5 @@ int		players::shoot(int x, int y)
 			kill(x, y);
 		return (2);
 	}
-	throw 1;
+	throw 1;	// catch in game::shoot_ship
 }

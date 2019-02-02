@@ -12,7 +12,7 @@ class game
 		void    ship_install(players *pl, char ch, int *num);
 		void    shoot_ship(players *pl, int *i);
 		void	start();
-		int		placeShips();
+		int		place_ships();
 		interface	inf;
 
 	private:

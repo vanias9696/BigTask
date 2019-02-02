@@ -68,7 +68,7 @@ void	interface::welcome_window(void)
 
 }
 
-char	interface::printStart(int x, int y)
+char	interface::print_start(int x, int y)	//print coordinates x and Y
 {
 	char tmp[2] = "\0";
 
@@ -121,7 +121,7 @@ void interface::print_field(void)
 	wattroff(win, COLOR_PAIR(5));
 }
 
-void interface::print_ships(players p, int R)
+void interface::print_ships_set(players p, int R)
 {
 	wattron(win, COLOR_PAIR(5));
 	for (int i = 0; i < 10; ++i)
@@ -135,7 +135,7 @@ void interface::print_ships(players p, int R)
 	wattroff(win, COLOR_PAIR(5));
 }
 
-void interface::rules(int i, int num, players p1, players p2)
+void interface::rules_set(int i, int num, players p1, players p2)
 {
 	wattron(win, COLOR_PAIR(1));
 	mvwprintw(win, 1, 2, "To set the ship enter the first x and y coordinate and press Y[vertically] or X[horizontally]");
@@ -149,7 +149,7 @@ void interface::rules(int i, int num, players p1, players p2)
 	wattron(win, COLOR_PAIR(5));
 	mvwprintw(win, 6, 27, "PLAYER   sets the ships");
 	mvwprintw(win, 6, 34, i == 0 ? "1" : "2");
-	print_ships(i == 0 ? p1 : p2, i == 0 ? 0 : 47);
+	print_ships_set(i == 0 ? p1 : p2, i == 0 ? 0 : 47);
 	wattroff(win, COLOR_PAIR(5));
 	wattron(win, COLOR_PAIR(3));
 	if (num == 0)
@@ -164,7 +164,7 @@ void interface::rules(int i, int num, players p1, players p2)
 	mvwprintw(win, 13, 35, "Y: ");
 }
 
-void	interface::print_ships2(players p1, players p2)
+void	interface::print_ships_game(players p1, players p2)
 {
 	for (int i = 0; i < 10; ++i)
 	{
@@ -186,7 +186,7 @@ void	interface::print_ships2(players p1, players p2)
 			{
 				wattron(win, COLOR_PAIR(6));
 				mvwprintw(win, 8 + j, 5 + 2*i, "O");
-				wattroff(win, COLOR_PAIR(5));
+				wattroff(win, COLOR_PAIR(6));
 			}
 			if (p2.map[i][j] == 2)
 			{
@@ -204,13 +204,13 @@ void	interface::print_ships2(players p1, players p2)
 			{
 				wattron(win, COLOR_PAIR(6));
 				mvwprintw(win, 8 + j, 52 + 2*i, "O");
-				wattroff(win, COLOR_PAIR(5));
+				wattroff(win, COLOR_PAIR(6));
 			}
 		}
 	}
 }
 
-void	interface::rulesG(int i, players p1, players p2)
+void	interface::rules_game(int i, players p1, players p2)
 {
 	wattron(win, COLOR_PAIR(1));
 	mvwprintw(win, 1, 2, "To select the coordinates of the target enter x coordinate, y coordinate and press ENTER");
@@ -223,7 +223,7 @@ void	interface::rulesG(int i, players p1, players p2)
 	mvwprintw(win, 25, 2, "If you kill the ship, the place will look like    #");
 	wattroff(win, COLOR_PAIR(1));
 	print_field();
-	print_ships2(p1, p2);
+	print_ships_game(p1, p2);
 	wattron(win, COLOR_PAIR(5));
 	if (i % 2 != 0)
 		mvwprintw(win, 6, 31, "PLAYER 1 move");

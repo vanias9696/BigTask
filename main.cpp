@@ -3,7 +3,7 @@
 int main(void)
 {
 	game on;
-	if (on.placeShips() != 0)
+	if (on.place_ships() != 0)
 		on.start();
     on.inf.goodbye();
 	return 0;
