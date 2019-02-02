@@ -1,4 +1,5 @@
 #include "players.hpp"
+#include <iostream>
 
 void	players::ship_setting(int num, int x, int y, int vh)
 {

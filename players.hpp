@@ -1,11 +1,11 @@
 #ifndef PLAYERS_HPP
 #define PLAYERS_HPP
 
-#include <iostream>
-
 class players
 {
 public:
+	players() = default;
+	~players() = default;
 	int	map[10][10] = {};
 	int number = 10;
 	void	ship_setting(int num, int x, int y, int vh);
