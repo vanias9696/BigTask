@@ -38,10 +38,10 @@ void    game::ship_install(players *pl, char ch, int *num)
             y_ = -1;
             *num = *num + 1;
         }
-        catch (const char *a)
+        catch (std::exception const &ex)
         {
             inf.error(2, 20, 25, "Not enough space for ship!");
-            inf.error(2, 21, 24, a);
+            inf.error(2, 21, 24, ex.what());
         }
     }
 
@@ -84,9 +84,9 @@ void    game::shoot_ship(players *pl, int *i)   // check if can shoot
             if (pl->shoot(x_, y_) == 1)
                 *i = *i + 1;
         }
-        catch (...)
+        catch (std::exception const &ex)
         {
-            inf.error(2, 20, 27, "You alredy shoot here!");
+            inf.error(2, 20, 27, ex.what());
         }
         x_ = -1;
         y_ = -1;

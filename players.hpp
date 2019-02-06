@@ -1,5 +1,6 @@
 #ifndef PLAYERS_HPP
 #define PLAYERS_HPP
+#include <exception>
 
 class players
 {

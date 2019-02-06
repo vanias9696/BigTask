@@ -6,9 +6,9 @@ void	players::ship_setting(int num, int x, int y, int vh)	//check the field: can
 	for (int n = 0; n < num; ++n)
 	{
 		if (y > 9)
-		  throw (static_cast<const char *>("Please move the ship higher!"));
+		  throw std::logic_error("Please move the ship higher!");
 		if (x > 9)
-		  throw (static_cast<const char *>("Please move the ship to the left!"));
+		  throw std::logic_error("Please move the ship to the left!");
 		for (int i = -1; i < 2; ++i)
 		{
 			for (int j = -1; j < 2; ++j)
@@ -21,7 +21,7 @@ void	players::ship_setting(int num, int x, int y, int vh)	//check the field: can
 					tmp += " ";
 					tmp += (y + j + '0');
 					tmp += " already taken!";
-					throw tmp.c_str();
+					throw std::logic_error(tmp);
 				}
 			}
 		}
@@ -124,5 +124,5 @@ int		players::shoot(int x, int y)
 			kill(x, y);
 		return (2);
 	}
-	throw 1;	// catch in game::shoot_ship
+	throw std::logic_error("You alredy shoot here!");	// catch in game::shoot_ship
 }
